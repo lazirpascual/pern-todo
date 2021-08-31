@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { getAllTodos, removeToDo } from "../services/todos";
+import { getAllTodos, removeTodo } from "../services/todos";
+import EditTodo from "./EditTodo";
 
 const ListTodo = ({ todos, setTodos }) => {
   useEffect(() => {
@@ -17,7 +18,7 @@ const ListTodo = ({ todos, setTodos }) => {
 
   const deleteToDo = async (todoId) => {
     try {
-      await removeToDo(todoId);
+      await removeTodo(todoId);
       setTodos(todos.filter((todo) => todo.todo_id !== todoId));
     } catch (error) {
       console.log(error.message);
@@ -43,7 +44,9 @@ const ListTodo = ({ todos, setTodos }) => {
           {todos.map((todo) => (
             <tr key={todo.todo_id}>
               <td>{todo.description}</td>
-              <td>Edit</td>
+              <td>
+                <EditTodo todo={todo} todos={todos} setTodos={setTodos} />
+              </td>
               <td>
                 <button
                   className="btn btn-danger"

@@ -45,12 +45,12 @@ todosRouter.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { description } = req.body;
-    await pool.query("UPDATE todo SET description = $1 WHERE todo_id = $2", [
-      description,
-      id,
-    ]);
+    const updatedTodo = await pool.query(
+      "UPDATE todo SET description = $1 WHERE todo_id = $2 RETURNING *",
+      [description, id]
+    );
 
-    res.status(200).json("Todo was updated!");
+    res.status(200).json(updatedTodo.rows[0]);
   } catch (error) {
     console.log(error.message);
   }

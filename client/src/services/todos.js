@@ -13,12 +13,12 @@ export const createTodo = async (newTodo) => {
   return response.data;
 };
 
-export const removeToDo = async (todoId) => {
+export const removeTodo = async (todoId) => {
   const response = await axios.delete(`${baseUrl}/${todoId}`);
   return response.data;
 };
 
-export const updatePostService = async (postId, updatedPost) => {
-  const response = await axios.put(`${baseUrl}/${postId}`, updatedPost);
+export const updateTodo = async (todoId, updatedTodo) => {
+  const response = await axios.put(`${baseUrl}/${todoId}`, updatedTodo);
   return response.data;
 };
