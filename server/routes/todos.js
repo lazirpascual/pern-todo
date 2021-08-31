@@ -26,4 +26,18 @@ todosRouter.get("/", async (req, res) => {
   }
 });
 
+// get a specific todo
+todosRouter.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const todo = await pool.query("SELECT * FROM todo WHERE todo_id = $1", [
+      id,
+    ]);
+
+    res.json(todo.rows[0]);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 module.exports = todosRouter;
