@@ -56,4 +56,15 @@ todosRouter.put("/:id", async (req, res) => {
   }
 });
 
+// delete a todo
+todosRouter.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.query("DELETE FROM todo WHERE todo_id = $1", [id]);
+    res.json("Todo was deleted!");
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 module.exports = todosRouter;
