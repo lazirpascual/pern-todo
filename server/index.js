@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const todosRouter = require("./routes/todos");
 
-// middleware
+// MIDDLEWARE
 app.use(cors());
 app.use(express.json());
 

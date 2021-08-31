@@ -16,4 +16,14 @@ todosRouter.post("/", async (req, res) => {
   }
 });
 
+// get all todos
+todosRouter.get("/", async (req, res) => {
+  try {
+    const allTodos = await pool.query("SELECT * FROM todo");
+    res.json(allTodos.rows);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 module.exports = todosRouter;
