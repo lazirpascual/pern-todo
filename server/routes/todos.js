@@ -40,4 +40,20 @@ todosRouter.get("/:id", async (req, res) => {
   }
 });
 
+// update a todo
+todosRouter.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { description } = req.body;
+    await pool.query("UPDATE todo SET description = $1 WHERE todo_id = $2", [
+      description,
+      id,
+    ]);
+
+    res.json("Todo was updated!");
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 module.exports = todosRouter;
