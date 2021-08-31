@@ -10,7 +10,7 @@ todosRouter.post("/", async (req, res) => {
       [description]
     );
 
-    res.json(newTodo.rows[0]);
+    res.status(200).json(newTodo.rows[0]);
   } catch (error) {
     console.log(error.message);
   }
@@ -34,7 +34,7 @@ todosRouter.get("/:id", async (req, res) => {
       id,
     ]);
 
-    res.json(todo.rows[0]);
+    res.status(200).json(todo.rows[0]);
   } catch (error) {
     console.log(error.message);
   }
@@ -50,7 +50,7 @@ todosRouter.put("/:id", async (req, res) => {
       id,
     ]);
 
-    res.json("Todo was updated!");
+    res.status(200).json("Todo was updated!");
   } catch (error) {
     console.log(error.message);
   }
@@ -61,7 +61,7 @@ todosRouter.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     await pool.query("DELETE FROM todo WHERE todo_id = $1", [id]);
-    res.json("Todo was deleted!");
+    res.status(200).json("Todo was deleted!");
   } catch (error) {
     console.log(error.message);
   }
