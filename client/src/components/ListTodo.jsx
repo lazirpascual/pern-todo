@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { getAllTodos, removeToDo } from "../services/todos";
 
-const ListTodo = () => {
-  const [todos, setTodos] = useState([]);
-
+const ListTodo = ({ todos, setTodos }) => {
   useEffect(() => {
     const getTodos = async () => {
       try {
@@ -15,7 +13,7 @@ const ListTodo = () => {
     };
 
     getTodos();
-  }, []);
+  }, [setTodos]);
 
   const deleteToDo = async (todoId) => {
     try {

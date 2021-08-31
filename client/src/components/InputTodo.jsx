@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createTodo } from "../services/todos";
 
-const InputTodo = () => {
+const InputTodo = ({ todos, setTodos }) => {
   const [description, setDescription] = useState("");
 
   const onSubmitForm = async (e) => {
@@ -9,7 +9,8 @@ const InputTodo = () => {
       e.preventDefault();
       const body = { description };
       const newTodo = await createTodo(body);
-      window.location = "/";
+      setTodos([...todos, newTodo]);
+      setDescription("");
     } catch (error) {
       console.log(error.message);
     }
