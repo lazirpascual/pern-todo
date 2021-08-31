@@ -12,7 +12,7 @@ This is a fullstack PERN to-do list application. Made using Javascript, React JS
 - **Front-End**: Javascript, React, Bootstrap 4 </br>
 - **Back-End**: NodeJS, Express </br>
 - **Database**: PostgreSQL </br>
-- **Deployment**: Heroku (backend), Netlify (frontend)
+- **Deployment**: Heroku (backend)
 
 ## ⚙️ Features
 
