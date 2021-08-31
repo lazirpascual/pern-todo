@@ -5,11 +5,11 @@ const pool = require("../db");
 todosRouter.post("/", async (req, res) => {
   try {
     const { description } = req.body;
-    const newTodo = await pool.query(
+    const client = await pool.connect();
+    const newTodo = await client.query(
       "INSERT INTO todo (description) VALUES($1) RETURNING *",
       [description]
     );
-
     res.status(200).json(newTodo.rows[0]);
   } catch (error) {
     console.log(error.message);
@@ -19,7 +19,8 @@ todosRouter.post("/", async (req, res) => {
 // get all todos
 todosRouter.get("/", async (req, res) => {
   try {
-    const allTodos = await pool.query("SELECT * FROM todo");
+    const client = await pool.connect();
+    const allTodos = await client.query("SELECT * FROM todo");
     res.json(allTodos.rows);
   } catch (error) {
     console.log(error.message);
@@ -30,10 +31,10 @@ todosRouter.get("/", async (req, res) => {
 todosRouter.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const todo = await pool.query("SELECT * FROM todo WHERE todo_id = $1", [
+    const client = await pool.connect();
+    const todo = await client.query("SELECT * FROM todo WHERE todo_id = $1", [
       id,
     ]);
-
     res.status(200).json(todo.rows[0]);
   } catch (error) {
     console.log(error.message);
@@ -45,7 +46,8 @@ todosRouter.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { description } = req.body;
-    const updatedTodo = await pool.query(
+    const client = await pool.connect();
+    const updatedTodo = await client.query(
       "UPDATE todo SET description = $1 WHERE todo_id = $2 RETURNING *",
       [description, id]
     );
@@ -60,7 +62,8 @@ todosRouter.put("/:id", async (req, res) => {
 todosRouter.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await pool.query("DELETE FROM todo WHERE todo_id = $1", [id]);
+    const client = await pool.connect();
+    await client.query("DELETE FROM todo WHERE todo_id = $1", [id]);
     res.status(200).json("Todo was deleted!");
   } catch (error) {
     console.log(error.message);

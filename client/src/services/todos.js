@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//const baseUrl = "https://chatvault.herokuapp.com/api/posts";
+//const baseUrl = "https://pern-to-do.herokuapp.com/api/todos";
 const baseUrl = "/api/todos";
 
 export const getAllTodos = async () => {

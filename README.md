@@ -1,6 +1,6 @@
 # To-Do List
 
-## Live Demo of [To-Do List](https://chatvault.netlify.app/)
+## Live Demo of [To-Do List](https://pern-to-do.herokuapp.com/)
 
 This is a fullstack PERN to-do list application. Made using Javascript, React JS, Bootstrap 4, Node JS, Express and PostgreSQL. <br />
 
@@ -21,4 +21,4 @@ This is a fullstack PERN to-do list application. Made using Javascript, React JS
 
 # App Preview
 
-![preview]()
+![preview](https://i.imgur.com/0liYise.jpg)
