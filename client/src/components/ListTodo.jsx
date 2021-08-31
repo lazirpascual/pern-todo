@@ -1,0 +1,65 @@
+import React, { useEffect, useState } from "react";
+import { getAllTodos, removeToDo } from "../services/todos";
+
+const ListTodo = () => {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const getTodos = async () => {
+      try {
+        const initialTodos = await getAllTodos();
+        setTodos(initialTodos);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getTodos();
+  }, []);
+
+  const deleteToDo = async (todoId) => {
+    try {
+      await removeToDo(todoId);
+      setTodos(todos.filter((todo) => todo.todo_id !== todoId));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  return (
+    <div>
+      <table className="table mt-5 text-center">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>john@example.com</td>
+          </tr> */}
+          {todos.map((todo) => (
+            <tr key={todo.todo_id}>
+              <td>{todo.description}</td>
+              <td>Edit</td>
+              <td>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteToDo(todo.todo_id)}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default ListTodo;

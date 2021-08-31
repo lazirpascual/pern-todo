@@ -9,7 +9,7 @@ const InputTodo = () => {
       e.preventDefault();
       const body = { description };
       const newTodo = await createTodo(body);
-      console.log(newTodo);
+      window.location = "/";
     } catch (error) {
       console.log(error.message);
     }

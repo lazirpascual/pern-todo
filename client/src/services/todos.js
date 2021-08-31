@@ -8,18 +8,13 @@ export const getAllTodos = async () => {
   return response.data;
 };
 
-export const getProfilePosts = async (username) => {
-  const response = await axios.get(`${baseUrl}/profile/${username}`);
-  return response.data;
-};
-
 export const createTodo = async (newTodo) => {
   const response = await axios.post(baseUrl, newTodo);
   return response.data;
 };
 
-export const removePost = async (postId, userId) => {
-  const response = await axios.delete(`${baseUrl}/${postId}/${userId}`);
+export const removeToDo = async (todoId) => {
+  const response = await axios.delete(`${baseUrl}/${todoId}`);
   return response.data;
 };
 
